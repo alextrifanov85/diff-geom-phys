@@ -1,0 +1,267 @@
+\documentclass[12pt]{article}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+%\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{ccfonts,eulervm,microtype}
+\renewcommand{\bfdefault}{sbc}
+
+\usepackage[margin=0.7in,bmargin=1.2in]{geometry}
+\usepackage{multicol}
+
+\usepackage[colorlinks=false,pagebackref=true]{hyperref}
+
+\usepackage{mathabx}
+
+\usepackage{tikz-cd}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc}
+
+\pagestyle{plain}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Th.}[section]
+\theoremstyle{lemma}
+\newtheorem{lemma}{Лемма}
+\theoremstyle{corollary}
+\newtheorem{corollary}{Следствие}
+\theoremstyle{proposition}
+\newtheorem{proposition}{Предложение}
+\theoremstyle{exercise}
+\newtheorem{exercise}{Упражнение}
+
+
+\theoremstyle{example}
+\newtheorem{example}{Ex.}
+\newtheorem{examples}[example]{Примеры}
+\theoremstyle{remark}
+\newtheorem{remark}{NB}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Опр.}
+
+
+\renewcommand{\emptyset}{\varnothing}
+\newcommand\mbZ{\mathbb Z}
+\newcommand\ph{\varphi}
+\newcommand\trleq{\trianglelefteq}
+\newcommand\isom{\cong}
+%\def\l{\lambda}
+%\def\m{\mu}
+\newcommand\la{\langle}
+\newcommand\ra{\rangle}
+\newcommand\mb{\mathbb}
+\newcommand\mc{\mathcal}
+\newcommand\divs{\,\lower.4ex\vdots\,}
+\newcommand\ol{\overline}
+\newcommand\eps{\varepsilon}
+
+\DeclareMathOperator{\ev}{ev}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\Ker}{Ker}
+\DeclareMathOperator{\Ree}{Re}
+\DeclareMathOperator{\Img}{Im}
+\DeclareMathOperator{\Arg}{Arg}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SL}{SL}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclareMathOperator{\ord}{ord}
+\DeclareMathOperator{\mmod}{mod}
+\DeclareMathOperator{\cchar}{char}
+
+\DeclareMathOperator{\logn}{ln}
+\DeclareMathOperator{\Logn}{Ln}
+\DeclareMathOperator{\Frac}{Frac}
+
+\DeclareMathOperator{\inv}{inv}
+\DeclareMathOperator{\adj}{adj}
+\DeclareMathOperator{\rk}{rk}
+\DeclareMathOperator{\pr}{pr}
+
+\DeclareMathOperator{\pow}{pow}
+%\DeclareMathOperator{\deg}{deg}
+\DeclareMathOperator{\Fix}{Fix}
+
+\DeclareMathOperator{\Map}{Map}
+\DeclareMathOperator{\const}{const}
+
+
+\newcommand\tld{\widetilde}
+\newcommand\rsa{\rightsquigarrow}
+\newcommand\mbC{\mathbb C}
+\newcommand\mbR{\mathbb R}
+
+\newcommand\literature[1]{{\small{\sc Литература}: #1}}
+
+\newcommand\dfn[1]{{\bf #1}}
+
+\makeindex
+
+%\includeonly{multilinear}
+\setcounter{section}{0}
+
+\begin{document}
+
+\section{Тензорное поле}
+
+\subsection{Структура тензорного расслоения}
+
+Пусть $\langle M, \tld{\mathcal{A}}_M\rangle$ - гладкое вещественное мноообразие размерности $\dim M = n$ 
+и пусть $T_PM$ - его касаетльное пространство в точке $P \in M$.
+
+\begin{definition}
+    \textbf{Тензором над} $T_PM$ будем называть элемент тензорного произведения
+    \begin{equation*}
+        T^r_sV_P = (V^\ast_P)^{\otimes r} \otimes V^{\otimes s}_P, \quad V_P = T_PM.
+    \end{equation*}  
+\end{definition}
+
+\begin{example}
+    Если $\alpha^1, \ldots, \alpha^r \in V_P^\ast$ и $v_1, \ldots, v_s \in V_P$, тогда
+    \begin{equation*}
+        \alpha^1 \otimes \ldots \otimes \alpha^r \otimes v_1 \otimes \ldots \otimes v_s \in T^r_sV_P
+    \end{equation*}
+\end{example}
+
+\begin{remark}
+    Пусть далее $\langle N, \tld{\mathcal{A}}_N\rangle$ - другое гладкое многообразие 
+    и $\sigma: M \to N$ - гладкое отображение между $M$ и $N$. Определим для некоторой 
+    точки $P \in M$ отображение $T_P \sigma_s: T^0_sV_P \to T^0_sW_{\sigma(P)}$, где 
+    $W_Q = T_QN$ следующим образом:
+    \begin{equation*}
+        \forall v_1 \ldots, v_s \in V_P, \quad 
+        v_1 \otimes \ldots \otimes v_s \mapsto T_P\sigma (v_1) \otimes \ldots \otimes T_P \sigma (v_s)
+    \end{equation*}
+    Если $\sigma$ - диффеоморфизм, тогда можно определить отборажение 
+    $T_P \sigma^r: (T^r_0 V_P)^\ast \to (T^r_0 W_{\sigma(P)})^\ast$ следующим образом:
+    \begin{equation*}
+        \forall \alpha^1, \ldots, \alpha^r \in V_P^\ast, \quad 
+        \alpha^1 \otimes \ldots \otimes \alpha^r \mapsto [T_P\sigma^\ast]^{-1} (\alpha^1) \otimes \ldots \otimes [T_P\sigma^\ast]^{-1}(\alpha^r)
+    \end{equation*}
+    где $T_P\sigma$ - линейное отображение касательного пространства в точке $P \in M$:
+    \begin{equation*}
+        T_P\sigma: T_PM \to T_{\sigma(P)}N, \quad (T_P\sigma)^\ast: (T_{\sigma(P)}N)^\ast \to (T_PM)^\ast 
+    \end{equation*}
+\end{remark}
+
+\begin{remark}
+    Если $(U,\varphi) \in \tld{\mathcal{A}}_M$ - карта на $M$, 
+    тогда $(TU, T\varphi)$ - карта на касательном расслоении $TM$, а 
+    $(T^\ast U, T^\ast \varphi)$ - карта на кокасательном расслоении $T^\ast M$
+    \begin{gather*}
+        TU = \bigcup_{P\in U} T_PM, \quad 
+        T\varphi: TU \to T\mb R^n, \\
+        T^\ast U = \bigcup_{P\in U} T^\ast_PM, \quad
+        T^\ast \varphi: T^\ast U \to (\mb R^n)^\ast ,\quad 
+        T^\ast \varphi = (T \varphi^\ast)^{-1}.
+    \end{gather*}
+\end{remark}
+
+\begin{lemma}
+    Расслоения $TM$ и $T^\ast M$ - гладкие многобразия, причем 
+    \begin{equation*}
+        \dim TM = \dim T^\ast M = 2 \cdot \dim M.
+    \end{equation*}
+\end{lemma}
+
+\begin{definition}
+    \textbf{Тензорным расслоением} типа $(r,s)$ называется множество 
+    \begin{equation*}
+        T^r_sM = \bigcup_{P\in M} T^r_s V_P.
+    \end{equation*}
+\end{definition}
+
+\begin{lemma}
+    Если $(U,\varphi) \in \tld{\mathcal{A}}_M$ - карта на $M$, тогда 
+    $(T^r_s U, T\sigma^r_s)$ - карта на $T^r_sM$ и 
+    \begin{gather*}
+        T^r_sU = \bigcup_{P \in U} T^r_s V_P, \quad 
+        T\sigma^r_s: T^r_sU \to T^r_s\mb R^n \\ 
+        T\sigma^r_s: \alpha^1 \otimes \ldots \otimes \alpha^r \otimes v_1 \otimes \ldots \otimes v_s \mapsto 
+        [T_P\sigma^\ast]^{-1} (\alpha^1) \otimes \ldots \otimes [T_P\sigma^\ast]^{-1} (\alpha^r) \otimes 
+        T_P\sigma (v_1) \otimes \ldots \otimes T_P\sigma (v_s).
+    \end{gather*}
+\end{lemma}
+
+\begin{theorem}
+    Тензорное расслоение $T^r_s M$ - гладкое $n^{r+s}$-мерное многообразие.
+\end{theorem}
+
+\subsection{Координаты в тензорном расслоении}
+
+Пусть $(U,\varphi) \in \tld{\mathcal{A}}_M$ - координатная карта на $M$, 
+причем $\{x^i\}_{i=1}^n$ - координатные функции на $U$:
+\begin{equation*}
+    \forall P \in U \quad \varphi(P) = (x_P^1, x_P^2, \ldots, x_P^n).
+\end{equation*}
+
+\begin{remark}
+    На касательно расслоении $TM$ отображение $\varphi = (x^1, x^2, \ldots, x^n)$
+    индуцирует координатное отображение $T\varphi$, которое для каждого 
+    $v_P \in TM$ возвращает набор: 
+    \begin{equation*}
+        [T\varphi](v_P) = [D_P \varphi](v_P) = (x^1_P, x^2_P, \ldots, x^n_P; \xi^1, \xi^2, \ldots, \xi^n), \quad 
+        \xi^i = dx_P^i(v_P), \quad 
+        v_P = \sum_{i=1}^n \xi^i \partial_{x^i}.
+    \end{equation*}
+    Базис $C^\infty(M)$-модуля $\chi(M)$ векторных полей на $M$ образует набор 
+    $\{\partial_i = \partial_{x^i}\}_{i=1}^n$.
+\end{remark}
+
+\begin{remark}
+    Аналогично, в кокасательном расслоении $T^\ast M$ индуцируется коордиантное отображение 
+    $T^\ast \varphi$, которое для каждого $\alpha_P \in T^\ast M$ возвращает набор
+    \begin{equation*}
+        [T^\ast\varphi](\alpha_P) = (x^1_P, x^2_P, \ldots, x^n_P; \eta_1, \eta_2, \ldots, \eta_n), \quad 
+        \eta_i = \widehat{\partial}_{x^i}(\alpha) = \alpha(\partial_{x^i}), \quad 
+        \alpha = \sum_{i=1}^{n} \eta_i dx^i.
+    \end{equation*}
+    Базис $C^\infty(M)$-модуля $\chi^\ast(M)$ дифференциальных 1-форм образует набор $\{dx^i\}_{i=1}^n$.
+\end{remark}
+
+\begin{remark}
+    Отобрежения $T\varphi$ и $T\varphi^\ast$ индуцируют, в свою очередь, координатное 
+    отображение $T\varphi^r_s$ на $T^r_sM$, а именно: для каждого $\tau_P \in T^r_sM$
+    будем иметь 
+    \begin{gather*}
+        \tau_P = \alpha^1 \otimes \ldots \otimes \alpha^r \otimes v_1 \otimes \ldots \otimes v_s, \\
+        [T^r_s\varphi](\tau_P) = (x^1_P, x^2_P, \ldots, x^n_P; \{\eta^1_{i_1}\ldots\eta^r_{i_r}\xi^{j_1}_1 \ldots \xi^{j_s}_s\}).
+    \end{gather*}
+\end{remark}
+
+\subsection{Тензорное поле}
+
+\begin{definition}
+    \textbf{Естестенной проекцией} тензороного расслоения $T^r_s(M)$ называется отображение 
+    \begin{equation*}
+        \pi: T^r_sM \to M, \quad \tau_P \mapsto P
+    \end{equation*}
+\end{definition}
+
+\begin{definition}
+    \textbf{Тензорным полем} называется гладкое сечение $\tau: M \to T^r_sM$ тензорного расслоения:
+    \begin{equation*}
+        \pi \circ \tau = id_M.
+    \end{equation*}
+\end{definition}
+
+\begin{remark}
+    Множество тензорных полей типа $(r,s)$ на $M$ договоримся обозначать $\chi^r_s(M)$.
+\end{remark}
+
+\begin{remark}
+    Базис $C^\infty(M)$-модуля $\chi^r_s(M)$ образует следующий набор тензорных полей 
+    \begin{equation*}
+        \{dx^{i_1} \otimes \ldots \otimes dx^{i_r} \otimes \partial_{j_1} \otimes \ldots \otimes \partial_{j_s}\}.
+    \end{equation*}
+\end{remark}
+
+Пусть $\sigma: M \to N$ - диффеоморфизм  
+
+\end{document}
