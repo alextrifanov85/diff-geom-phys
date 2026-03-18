@@ -252,6 +252,16 @@
 \end{definition}
 
 \begin{remark}
+    В координатной карте $(U, \varphi) \in \tld{\mathcal{A}}_M$ и индуцированной ею карте 
+    $(T^r_sU, T^r_s \varphi)$ на $T^r_sM$ представитель отображения $\tau$ имеет вид:
+    \begin{equation*}
+        \widehat{\tau} = T^r_s\varphi \circ \tau \circ \varphi^{-1}, \quad 
+        \widehat{\tau}(x^1, \ldots, x^n) = t_{i_1, i_2, \ldots, i_r}^{j_1, j_2, \ldots, j_s}(x^1, \ldots, x^n) \cdot
+        x^{i_1} \otimes \ldots \otimes dx^{i_r} \otimes \partial_{j_1} \otimes \ldots \otimes \partial_{j_s}
+    \end{equation*} 
+\end{remark}
+
+\begin{remark}
     Множество тензорных полей типа $(r,s)$ на $M$ договоримся обозначать $\chi^r_s(M)$.
 \end{remark}
 
@@ -262,6 +272,80 @@
     \end{equation*}
 \end{remark}
 
-Пусть $\sigma: M \to N$ - диффеоморфизм  
+\begin{lemma}
+    При преобразовании координат $\{x^i\} \to \{y^j\}$, индуцированном переходом от карты 
+    $(U,\varphi)$ к карте $(V,\psi)$ набор функций $t_{i_1, i_2, \ldots, i_r}^{j_1, j_2, \ldots, j_s}$ 
+    преобразуется следующим образом:
+    \begin{equation*}
+        \tld{t}_{k_1, k_2, \ldots, k_r}^{m_1, m_2, \ldots, m_s} = 
+        t_{i_1, i_2, \ldots, i_r}^{j_1, j_2, \ldots, j_s} \mu^{i_1}_{k_1} \ldots \mu^{i_r}_{k_r}\nu_{j_1}^{m_1} \ldots \nu_{j_s}^{m_s}, \quad 
+        \mu = D(\psi \circ \varphi^{-1}) = \left(\frac{\partial y^j}{\partial x^i}\right), \quad 
+        \nu = \mu^{-1}.
+    \end{equation*}
+\end{lemma}
+
+\subsection{Производная тензорного поля}
+
+\begin{definition}
+    \textbf{Тензорной производной} называется семейство отображений $D^r_s: \chi^r_s(M) \to \chi^r_s(M)$, 
+    (которые для удобства договоримся обозначать просто $D$), удовлетворяющее следующим аксиомам:
+    \begin{enumerate}
+        \item $D(a \tau + b \omega) = a \cdot D(\tau) + b \cdot D(\omega)$ - линейность;
+        \item $D \circ \mathcal{C} = \mathcal{C} \circ D$ - коммутирование со сверткой;
+        \item $D(\tau \otimes \omega) = D(\tau) \otimes \omega + \tau \otimes D(\omega)$ - правило Лейбница.
+    \end{enumerate}
+\end{definition}
+
+\begin{example}
+    Пример производной - производная Ли вдоль векторного поля $v \in \chi(M)$:
+    \begin{enumerate}
+        \item $f \in C^\infty(M), \quad Df = \mathcal{L}_v(f) = v(f)$;
+        \item $u \in \chi(M), \quad \mathcal{L}_v(u) = [v,u]$.
+    \end{enumerate}
+\end{example}
+
+\begin{example}
+    Пользуясь определением, найдем выражение для $D(\alpha)$, где $\alpha \in \chi^\ast(M)$. Пусть 
+    $u \in \chi(M)$, тогда
+    \begin{equation*}
+        D[\alpha(u)] = (D \circ \mathcal{C})(\alpha \otimes u) = 
+        \mathcal{C}(D(\alpha) \otimes u + \alpha \otimes D(u)) = 
+        [D(\alpha)](u) + \alpha[D(u)].
+    \end{equation*}
+    Таким образом, окончательно получим:
+    \begin{equation*}
+        [D(\alpha)](u) = D[\alpha(u)] - \alpha[D(u)] = (D \circ \alpha - \alpha \circ D)(u).
+    \end{equation*}
+\end{example}
+
+\begin{remark}
+    Пусть $v \in \chi(M)$ и $D = \mathcal{L}_v$, тогда 
+    \begin{equation*}
+        [\mathcal{L}_v(\alpha)](u) = v[\alpha(u)] - \alpha([v,u]).
+    \end{equation*}
+\end{remark}
+
+\begin{lemma}
+    Производная Ли может быть обобщена на полилинейные отображения.
+\end{lemma}
+
+\begin{proof}
+    Рассмотрим форму $\omega: X^{\times r} \times (X^\ast)^{\times s} \to \mb R$. Имеем:
+    \begin{equation*}
+        \omega(\alpha^1, \ldots, \alpha^r, u_1, \ldots, u_s) = 
+        \mathcal{C}(\omega \otimes \alpha^1 \otimes \ldots  \otimes \alpha^r \otimes u_1 \otimes \ldots \otimes u_s).
+    \end{equation*}
+    Применив к обеим частям оператор $D$, получим:
+    \begin{gather*}
+        D[\omega(\ldots)] = [D\omega](\ldots) + \sum_{k=1}^{r} \omega[\ldots D(\alpha^k) \ldots] + 
+        \sum_{m=1}^{s} \omega[\ldots D(u_m) \ldots].
+    \end{gather*}
+    Переходя обратно $D = \mathcal{L}_v$, окончательно получим:
+    \begin{equation*}
+        [\mathcal{L}_v(\omega)](\ldots) = \mathcal{L}_v[\omega(\ldots)] - 
+        \sum_{k=1}^{r} \omega[\ldots \mathcal{L}_v(\alpha^k) \ldots] - 
+        \sum_{m=1}^{s} \omega[\ldots \mathcal{L}_v(u_m) \ldots].
+    \end{equation*}
+\end{proof}
 
 \end{document}
